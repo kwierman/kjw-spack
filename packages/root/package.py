@@ -3,6 +3,10 @@ import sys
 
 
 class Root(Package):
+    """
+        KJW's installation of ROOT because the canonical one doesn't
+        work for OSX.
+    """
     homepage = "https://root.cern.ch"
     url      = "https://root.cern.ch/download/root_v6.07.02.source.tar.gz"
 
@@ -13,9 +17,10 @@ class Root(Package):
     depends_on("pcre")
     depends_on("fftw~mpi")
     depends_on("graphviz", when="+graphviz")
-    extends("python")
+    extends("python+shared+tk")
+    depends_on("python+shared+tk")
     depends_on("gsl")
-    depends_on("libxml2+python")
+    depends_on("libxml2+python^python+shared+tk")
     depends_on("jpeg")
     if sys.platform != 'darwin':
         depends_on("libtool", type='build')
